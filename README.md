@@ -1,6 +1,8 @@
-<a href="https://github.com/doombubbles/BTD6-Mods/raw/main/FasterForward/FasterForward.dll"><img align="right" alt="Download" height="75" src="https://github.com/doombubbles/BTD6-Mods/blob/main/download.png?raw=true"></a>
+<a href="https://github.com/doombubbles/faster-forward/releases/latest/download/FasterForward.dll"><img align="right" alt="Download" height="75" src="https://github.com/doombubbles/BTD6-Mods/blob/main/download.png?raw=true"></a>
 
 # Faster Forward
+
+## NOTE: This version of the mod requires BTD6 Mod Helper >v3.0 and MelonLoader >v0.6
 
 Allows you to increase the Fast Forward speed using the FN keys.
 
