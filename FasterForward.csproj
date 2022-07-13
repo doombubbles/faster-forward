@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net48</TargetFramework>
         <RootNamespace>FasterForward</RootNamespace>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Configurations>Debug;Release</Configurations>
         <Nullable>enable</Nullable>
         <AssemblyName>FasterForward</AssemblyName>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,10 +17,6 @@
         <Optimize>True</Optimize>
         <DebugType>none</DebugType>
     </PropertyGroup>
-    
-    <Import Project="..\btd6.targets" />
-    <ItemGroup>
-        <Reference Include="$(BloonsTD6)\Mods\BloonsTD6 Mod Helper.dll" />
-    </ItemGroup>
 
+    <Import Project="..\btd6.targets" />
 </Project>
