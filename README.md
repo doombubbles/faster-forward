@@ -17,9 +17,3 @@ F4: 25x Speed
 F5: Custom Speed
 
 Hotkeys are customizable in the Mod Settings page
-
-**Changelog**
-
-v1.0.3 Updated for Mod Helper 3.0, customizable hotkeys
-
-v1.0.2 Updated for Bloons TD Mod Helper Official Release
