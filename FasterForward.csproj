@@ -1,21 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net48</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>FasterForward</RootNamespace>
         <Configurations>Debug;Release</Configurations>
         <Nullable>enable</Nullable>
         <AssemblyName>FasterForward</AssemblyName>
         <LangVersion>latest</LangVersion>
-    </PropertyGroup>
-    
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <Optimize>False</Optimize>
         <DebugType>embedded</DebugType>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <Optimize>True</Optimize>
-        <DebugType>none</DebugType>
     </PropertyGroup>
 
     <Import Project="..\btd6.targets" />
