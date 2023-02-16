@@ -9,6 +9,7 @@ using BTD_Mod_Helper.Api.ModOptions;
 using BTD_Mod_Helper.Extensions;
 using FasterForward;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [assembly: MelonInfo(typeof(FasterForwardMod), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
 [assembly: MelonGame("Ninja Kiwi", "BloonsTD6")]
@@ -66,9 +67,20 @@ public class FasterForwardMod : BloonsTD6Mod
         {
             speed = 25;
         }
-            
+
         if (InGame.instance == null) return;
 
+        UpdateInGame();
+
+        if (speed != lastSpeed)
+        {
+            Game.instance.ShowMessage("Fast Forward Speed is now " + speed + "x" + (speed == 3 ? " (Default)" : ""),
+                1f);
+        }
+    }
+
+    public static void UpdateInGame()
+    {
         if (SpeedCustom.JustPressed())
         {
             PopupScreen.instance.ShowSetValuePopup("Custom Fast Forward Speed",
@@ -103,12 +115,5 @@ public class FasterForwardMod : BloonsTD6Mod
         }
 
         TimeManager.maxSimulationStepsPerUpdate = speed;
-
-        if (speed != lastSpeed)
-        {
-            Game.instance.ShowMessage("Fast Forward Speed is now " + speed + "x" + (speed == 3 ? " (Default)" : ""),
-                1f);
-        }
-
     }
 }

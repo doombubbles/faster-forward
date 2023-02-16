@@ -1,2 +1,1 @@
-- Updated to Mod Helper 3.0
-- Customizable Hotkeys
+- Fixed for BTD6 v35.0
