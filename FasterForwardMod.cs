@@ -20,12 +20,12 @@ public class FasterForwardMod : BloonsTD6Mod
 {
     private static int speed = 3;
 
-    private static readonly ModSettingHotkey Speed3 = new(KeyCode.F1)
+    private static readonly ModSettingHotkey Speed3 = new(KeyCode.I)
     {
         displayName = "3x Speed (default) Hotkey"
     };
 
-    private static readonly ModSettingHotkey Speed5 = new(KeyCode.F2)
+    private static readonly ModSettingHotkey Speed5 = new(KeyCode.O)
     {
         displayName = "5x Speed Hotkey"
     };
@@ -40,7 +40,7 @@ public class FasterForwardMod : BloonsTD6Mod
         displayName = "25x Speed Hotkey"
     };
 
-    private static readonly ModSettingHotkey SpeedCustom = new(KeyCode.F5)
+    private static readonly ModSettingHotkey SpeedCustom = new(KeyCode.P)
     {
         displayName = "Custom Speed Hotkey"
     };
