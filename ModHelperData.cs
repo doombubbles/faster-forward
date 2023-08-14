@@ -14,5 +14,7 @@ public static class ModHelperData
         "F2: 5x Speed<br>" +
         "F3: 10x Speed<br>" +
         "F4: 25x Speed<br>" +
-        "F5: Custom Speed";
+        "F5: Custom Speed" +
+        "" +
+        "WARNING: Usage of this mod will almost certainly get you flagged. Use with caution!";
 }
