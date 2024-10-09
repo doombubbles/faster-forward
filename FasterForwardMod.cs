@@ -5,6 +5,7 @@ using Il2CppAssets.Scripts.Unity.UI_New.Popups;
 using MelonLoader;
 using Il2CppAssets.Scripts.Utils;
 using BTD_Mod_Helper;
+using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Api.ModOptions;
 using BTD_Mod_Helper.Extensions;
 using FasterForward;
@@ -48,6 +49,7 @@ public class FasterForwardMod : BloonsTD6Mod
     public override void OnUpdate()
     {
         var lastSpeed = speed;
+
         if (Speed3.JustPressed())
         {
             speed = 3;
@@ -68,20 +70,7 @@ public class FasterForwardMod : BloonsTD6Mod
             speed = 25;
         }
 
-        if (InGame.instance == null) return;
-
-        UpdateInGame();
-
-        if (speed != lastSpeed)
-        {
-            Game.instance.ShowMessage("Fast Forward Speed is now " + speed + "x" + (speed == 3 ? " (Default)" : ""),
-                1f);
-        }
-    }
-
-    public static void UpdateInGame()
-    {
-        if (SpeedCustom.JustPressed())
+        if (SpeedCustom.JustPressed() && InGame.instance != null)
         {
             PopupScreen.instance.ShowSetValuePopup("Custom Fast Forward Speed",
                 "Sets the Fast Forward speed to the specified value",
@@ -103,17 +92,15 @@ public class FasterForwardMod : BloonsTD6Mod
                 }), speed);
         }
 
-        if (TimeManager.FastForwardActive)
-        {
-            TimeManager.timeScaleWithoutNetwork = speed;
-            TimeManager.networkScale = speed;
-        }
-        else
-        {
-            TimeManager.timeScaleWithoutNetwork = 1;
-            TimeManager.networkScale = 1;
-        }
+        if (InGame.instance == null || InGame.Bridge == null) return;
 
-        TimeManager.maxSimulationStepsPerUpdate = speed;
+        if (speed != lastSpeed)
+        {
+            Game.instance.ShowMessage("Fast Forward Speed is now " + speed + "x" + (speed == 3 ? " (Default)" : ""),
+                1f);
+
+            TimeHelper.OverrideFastForwardTimeScale = speed;
+            TimeHelper.OverrideMaxSimulationStepsPerUpdate = speed;
+        }
     }
 }
