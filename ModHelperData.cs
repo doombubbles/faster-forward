@@ -3,7 +3,7 @@
 public static class ModHelperData
 {
     public const string WorksOnVersion = "45.0";
-    public const string Version = "1.1.3";
+    public const string Version = "1.1.4";
     public const string RepoOwner = "doombubbles";
     public const string RepoName = "faster-forward";
     public const string Name = "Faster Forward";

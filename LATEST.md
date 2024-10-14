@@ -1,1 +1,1 @@
-- Fixed for BTD6 v35.0
+- Fixed Custom Speed Hotkey
