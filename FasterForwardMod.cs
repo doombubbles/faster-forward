@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Il2CppAssets.Scripts.Unity;
 using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using Il2CppAssets.Scripts.Unity.UI_New.Popups;
@@ -19,24 +19,44 @@ namespace FasterForward;
 
 public class FasterForwardMod : BloonsTD6Mod
 {
-    private static readonly ModSettingHotkey Speed3 = new(KeyCode.F1)
+    private static readonly ModSettingHotkey Hotkey1 = new(KeyCode.F1)
     {
-        displayName = "3x Speed (default) Hotkey"
+        displayName = "First Speed Hotkey"
     };
 
-    private static readonly ModSettingHotkey Speed5 = new(KeyCode.F2)
+    private static readonly ModSettingInt Speed1 = new ModSettingInt(3)
     {
-        displayName = "5x Speed Hotkey"
+        displayName = "Speed"
     };
 
-    private static readonly ModSettingHotkey Speed10 = new(KeyCode.F3)
+    private static readonly ModSettingHotkey Hotkey2 = new(KeyCode.F2)
     {
-        displayName = "10x Speed Hotkey"
+        displayName = "Second Speed Hotkey"
     };
 
-    private static readonly ModSettingHotkey Speed25 = new(KeyCode.F4)
+    private static readonly ModSettingInt Speed2 = new ModSettingInt(5)
     {
-        displayName = "25x Speed Hotkey"
+        displayName = "Speed"
+    };
+
+    private static readonly ModSettingHotkey Hotkey3 = new(KeyCode.F3)
+    {
+        displayName = "Third Speed Hotkey"
+    };
+
+    private static readonly ModSettingInt Speed3 = new ModSettingInt(10)
+    {
+        displayName = "Speed"
+    };
+
+    private static readonly ModSettingHotkey Hotkey4 = new(KeyCode.F4)
+    {
+        displayName = "Fourth Speed Hotkey"
+    };
+
+    private static readonly ModSettingInt Speed4 = new ModSettingInt(25)
+    {
+        displayName = "Speed"
     };
 
     private static readonly ModSettingHotkey SpeedCustom = new(KeyCode.F5)
@@ -46,24 +66,24 @@ public class FasterForwardMod : BloonsTD6Mod
 
     public override void OnUpdate()
     {
-        if (Speed3.JustPressed())
+        if (Hotkey1.JustPressed())
         {
-            SetSpeed(3);
+            SetSpeed(Speed1);
         }
 
-        if (Speed5.JustPressed())
+        if (Hotkey2.JustPressed())
         {
-            SetSpeed(5);
+            SetSpeed(Speed2);
         }
 
-        if (Speed10.JustPressed())
+        if (Hotkey3.JustPressed())
         {
-            SetSpeed(10);
+            SetSpeed(Speed3);
         }
 
-        if (Speed25.JustPressed())
+        if (Hotkey4.JustPressed())
         {
-            SetSpeed(25);
+            SetSpeed(Speed4);
         }
 
         if (SpeedCustom.JustPressed() && InGame.instance != null)
