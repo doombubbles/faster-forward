@@ -8,7 +8,9 @@ using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Api.ModOptions;
 using BTD_Mod_Helper.Extensions;
 using FasterForward;
+using HarmonyLib;
 using Il2CppAssets.Scripts;
+using Il2CppAssets.Scripts.Unity.UI_New.Upgrade;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
@@ -24,9 +26,9 @@ public class FasterForwardMod : BloonsTD6Mod
         displayName = "First Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed1 = new ModSettingInt(3)
+    private static readonly ModSettingInt Speed1 = new(3)
     {
-        displayName = "Speed"
+        displayName = "First Speed"
     };
 
     private static readonly ModSettingHotkey Hotkey2 = new(KeyCode.F2)
@@ -34,9 +36,9 @@ public class FasterForwardMod : BloonsTD6Mod
         displayName = "Second Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed2 = new ModSettingInt(5)
+    private static readonly ModSettingInt Speed2 = new(5)
     {
-        displayName = "Speed"
+        displayName = "Second Speed"
     };
 
     private static readonly ModSettingHotkey Hotkey3 = new(KeyCode.F3)
@@ -44,9 +46,9 @@ public class FasterForwardMod : BloonsTD6Mod
         displayName = "Third Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed3 = new ModSettingInt(10)
+    private static readonly ModSettingInt Speed3 = new(10)
     {
-        displayName = "Speed"
+        displayName = "Third Speed"
     };
 
     private static readonly ModSettingHotkey Hotkey4 = new(KeyCode.F4)
@@ -54,9 +56,9 @@ public class FasterForwardMod : BloonsTD6Mod
         displayName = "Fourth Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed4 = new ModSettingInt(25)
+    private static readonly ModSettingInt Speed4 = new(25)
     {
-        displayName = "Speed"
+        displayName = "Fourth Speed"
     };
 
     private static readonly ModSettingHotkey SpeedCustom = new(KeyCode.F5)
@@ -99,7 +101,6 @@ public class FasterForwardMod : BloonsTD6Mod
         if (NumberHelpers.Approximately(TimeHelper.OverrideFastForwardTimeScale, speed)) return;
 
         TimeHelper.OverrideFastForwardTimeScale = speed;
-        TimeHelper.OverrideMaxSimulationStepsPerUpdate = speed;
 
         var isDefault = NumberHelpers.Approximately(speed, Constants.fastForwardTimeScaleMultiplier);
 
@@ -114,4 +115,22 @@ public class FasterForwardMod : BloonsTD6Mod
             Game.instance.ShowMessage(message, 1f);
         }
     }
+
+    /// <summary>
+    /// Make upgrade popup time not take longer at higher game speeds
+    /// </summary>
+    [HarmonyPatch(typeof(UpgradeDetails), nameof(UpgradeDetails.Update))]
+    internal static class UpgradeDetails_Update
+    {
+        [HarmonyPrefix]
+        internal static void Prefix(UpgradeDetails __instance)
+        {
+            if (__instance.beginShowPopup)
+            {
+                // 3x to make the default speed like it is while fast forwarded
+                __instance.popupTimer += 3 * Time.unscaledDeltaTime - Time.fixedUnscaledDeltaTime;
+            }
+        }
+    }
+
 }

@@ -1,1 +1,2 @@
-- Fixed Custom Speed Hotkey
+- Can now customize the speed of each hotkey in settings (thanks @FeeNiiX !)
+- Patched the upgrade screen popup window delay to not take longer at higher game speeds
