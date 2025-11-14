@@ -6,6 +6,7 @@ using MelonLoader;
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Api.ModOptions;
+using BTD_Mod_Helper.Api.UI;
 using BTD_Mod_Helper.Extensions;
 using FasterForward;
 using HarmonyLib;
@@ -21,47 +22,55 @@ namespace FasterForward;
 
 public class FasterForwardMod : BloonsTD6Mod
 {
-    private static readonly ModSettingHotkey Hotkey1 = new(KeyCode.F1)
+    public static readonly ModSettingHotkey Hotkey1 = new(KeyCode.F1)
     {
         displayName = "First Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed1 = new(3)
+    public static readonly ModSettingInt Speed1 = new(3)
     {
-        displayName = "First Speed"
+        displayName = "First Speed",
+        min = 1,
+        max = 100
     };
 
-    private static readonly ModSettingHotkey Hotkey2 = new(KeyCode.F2)
+    public static readonly ModSettingHotkey Hotkey2 = new(KeyCode.F2)
     {
         displayName = "Second Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed2 = new(5)
+    public static readonly ModSettingInt Speed2 = new(5)
     {
-        displayName = "Second Speed"
+        displayName = "Second Speed",
+        min = 1,
+        max = 100
     };
 
-    private static readonly ModSettingHotkey Hotkey3 = new(KeyCode.F3)
+    public static readonly ModSettingHotkey Hotkey3 = new(KeyCode.F3)
     {
         displayName = "Third Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed3 = new(10)
+    public static readonly ModSettingInt Speed3 = new(10)
     {
-        displayName = "Third Speed"
+        displayName = "Third Speed",
+        min = 1,
+        max = 100
     };
 
-    private static readonly ModSettingHotkey Hotkey4 = new(KeyCode.F4)
+    public static readonly ModSettingHotkey Hotkey4 = new(KeyCode.F4)
     {
         displayName = "Fourth Speed Hotkey"
     };
 
-    private static readonly ModSettingInt Speed4 = new(25)
+    public static readonly ModSettingInt Speed4 = new(25)
     {
-        displayName = "Fourth Speed"
+        displayName = "Fourth Speed",
+        min = 1,
+        max = 100
     };
 
-    private static readonly ModSettingHotkey SpeedCustom = new(KeyCode.F5)
+    public static readonly ModSettingHotkey SpeedCustom = new(KeyCode.F5)
     {
         displayName = "Custom Speed Hotkey"
     };
@@ -90,13 +99,18 @@ public class FasterForwardMod : BloonsTD6Mod
 
         if (SpeedCustom.JustPressed() && InGame.instance != null)
         {
-            PopupScreen.instance.ShowSetValuePopup("Custom Fast Forward Speed",
-                "Sets the Fast Forward speed to the specified value",
-                new Action<int>(s => SetSpeed(Mathf.Clamp(s, 1, 100))), (int) TimeHelper.OverrideFastForwardTimeScale);
+            SetCustomSpeed();
         }
     }
 
-    private static void SetSpeed(double speed)
+    public static void SetCustomSpeed()
+    {
+        PopupScreen.instance.ShowSetValuePopup("Custom Fast Forward Speed",
+            "Sets the Fast Forward speed to the specified value",
+            new Action<int>(s => SetSpeed(Mathf.Clamp(s, 1, 100))), (int) TimeHelper.OverrideFastForwardTimeScale);
+    }
+
+    public static void SetSpeed(double speed)
     {
         if (NumberHelpers.Approximately(TimeHelper.OverrideFastForwardTimeScale, speed)) return;
 
