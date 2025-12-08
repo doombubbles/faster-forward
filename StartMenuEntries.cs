@@ -1,5 +1,4 @@
-﻿#if DEBUG
-using System.Linq;
+﻿using System.Linq;
 using BTD_Mod_Helper.Api.Data;
 using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Api.ModOptions;
@@ -13,7 +12,7 @@ public class Speed : ModStartMenuEntry, IModSettings
     private static readonly ModSettingBool AddStartMenuEntry = new(false)
     {
         description =
-            "Adds an entry to the Mod Helper in game menu for changing the fast forward speed without hotkeys"
+            "Adds an entry to the Mod Helper in game Start Menu for changing the fast forward speed without hotkeys"
     };
 
     public override string Icon => GetTextureGUID("Icon");
@@ -59,4 +58,3 @@ public class Custom : ModStartMenuEntry<Speed>
 
     public override bool IsSelected() => GetContent<SpeedEntry>().All(entry => !entry.IsSelected());
 }
-#endif

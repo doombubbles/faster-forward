@@ -1,2 +1,2 @@
-- Can now customize the speed of each hotkey in settings (thanks @FeeNiiX !)
-- Patched the upgrade screen popup window delay to not take longer at higher game speeds
+- Added a setting to toggle whether the ingame message popups are shown when changing speed
+- Added a setting for adding entries to the Mod Helper start menu to change speeds without needing hotkeys

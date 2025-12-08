@@ -6,7 +6,6 @@ using MelonLoader;
 using BTD_Mod_Helper;
 using BTD_Mod_Helper.Api.Helpers;
 using BTD_Mod_Helper.Api.ModOptions;
-using BTD_Mod_Helper.Api.UI;
 using BTD_Mod_Helper.Extensions;
 using FasterForward;
 using HarmonyLib;
@@ -75,6 +74,11 @@ public class FasterForwardMod : BloonsTD6Mod
         displayName = "Custom Speed Hotkey"
     };
 
+    private static readonly ModSettingBool ShowMessages = new(true)
+    {
+        description = "Whether to show the in game message popups for fast forward speed changing"
+    };
+
     public override void OnUpdate()
     {
         if (Hotkey1.JustPressed())
@@ -116,17 +120,19 @@ public class FasterForwardMod : BloonsTD6Mod
 
         TimeHelper.OverrideFastForwardTimeScale = speed;
 
+        if (InGame.instance == null || InGame.Bridge == null) return;
+
         var isDefault = NumberHelpers.Approximately(speed, Constants.fastForwardTimeScaleMultiplier);
 
         var message = $"Fast Forward Speed is now {speed}x{(isDefault ? " (Default)" : "")}";
 
-        if (InGame.instance == null || InGame.Bridge == null)
+        if (ShowMessages)
         {
-            ModHelper.Msg<FasterForwardMod>(message);
+            Game.instance.ShowMessage(message, 1f);
         }
         else
         {
-            Game.instance.ShowMessage(message, 1f);
+            ModHelper.Msg<FasterForwardMod>(message);
         }
     }
 
