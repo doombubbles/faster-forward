@@ -1,2 +1,0 @@
-- Added a setting to toggle whether the ingame message popups are shown when changing speed
-- Added a setting for adding entries to the Mod Helper start menu to change speeds without needing hotkeys
